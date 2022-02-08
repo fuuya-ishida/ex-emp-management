@@ -12,7 +12,6 @@ public class Administrator {
 	private Integer id;
 	
 	/**  名前 */
-	/**  名前 */
 	
 	private String name;
 	

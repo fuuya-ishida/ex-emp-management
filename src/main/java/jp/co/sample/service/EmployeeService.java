@@ -37,5 +37,16 @@ public class EmployeeService {
 		return employeeRepository.findAll();
 	}
 	
+	/**
+	 * 従業員情報の取得
+	 * 
+	 * 
+	 *
+	 */
+	public Employee showDetail(Integer id) {
+		return employeeRepository.load(id);
+	}
+	
+	
 
 }

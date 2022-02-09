@@ -67,7 +67,7 @@ public class EmployeeRepository {
 	 * 従業員が存在しない場合は例外発生
 	 */
 	public Employee load(Integer id) {
-		String sql = "SELECT SELECT id,name,image,gender,hire_date,mail_address,mail_address,"
+		String sql = "SELECT id,name,image,gender,hire_date,mail_address,mail_address,"
 				+ "zip_code,address,telephone,salary,characteristics,dependents_count"
 				+ " FROM employees WHERE id = :id";
 		

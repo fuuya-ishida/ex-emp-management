@@ -72,17 +72,15 @@
 					<tbody>
 						<tr th:each="employee:${employeeList}">
 							<td>
+								<a th:href="@{/employee/showDetail(id=${employee.id})}">
 									<span  th:text='${employee.name}'>dummy</span>
+								</a>
 							</td>
 							<td>
-								<a href="detail.html">
 									<span  th:text='${employee.hireDate}'>dummy</span>
-								</a>
 							</td>
 							<td>
-								<a href="detail.html">
 									<span  th:text='${employee.dependentsCount}'>dummy</span>
-								</a>
 							</td>
 						</tr>
 					</tbody>

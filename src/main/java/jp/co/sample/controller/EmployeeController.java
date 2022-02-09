@@ -5,9 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jp.co.sample.domain.Employee;
+import jp.co.sample.form.UpdateEmployeeForm;
 import jp.co.sample.service.EmployeeService;
 
 /**
@@ -38,14 +40,29 @@ public class EmployeeController {
 		
 		model.addAttribute("employeeList",employeeList);
 		
-		
-		
-		System.out.println(employeeList.size());
-		
 		return "employee/list";
 		
 	}
 	
+	/**
+	 * UpdateEmployeeFormをインスタンス化しそのままreturn
+	 * 
+	 * 扶養人数更新の際、リクエストパラメータをModelオブジェクトに自動格納させるための処理
+	 *
+	 */
+	@ModelAttribute
+	public UpdateEmployeeForm setUpUpdateEmployeeForm() {
+		return new UpdateEmployeeForm();
+	}
+	
+	@RequestMapping("/showDetail")
+	public String showDetail(String id,Model model) {
+		int intid = Integer.parseInt(id);
+	
+		model.addAttribute("employee",employeeService.showDetail(intid));
+		
+		return "employee/detail";
+	}
 	
 
 }

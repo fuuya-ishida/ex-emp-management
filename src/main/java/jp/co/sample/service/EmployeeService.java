@@ -47,6 +47,18 @@ public class EmployeeService {
 		return employeeRepository.load(id);
 	}
 	
+	/**
+	 * 従業員情報の更新
+	 * 
+	 * 
+	 *
+	 */
+	public void upDate(Employee employee) {
+		employeeRepository.update(employee);
+	}
+	
+	
+	
 	
 
 }

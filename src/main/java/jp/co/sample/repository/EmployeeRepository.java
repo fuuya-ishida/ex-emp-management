@@ -9,13 +9,15 @@ import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.stereotype.Repository;
 
 import jp.co.sample.domain.Employee;
 
+@Repository
 public class EmployeeRepository {
 	
 	/** RowMapperの定義 */
-	private static final RowMapper<Employee> Employee_ROW_MAPPER = (rs,i) -> {
+	private static final RowMapper<Employee> EMPLOYEE_ROW_MAPPER = (rs,i) -> {
 		Employee employee = new Employee();
 		
 		employee.setId(rs.getInt("id"));
@@ -25,7 +27,7 @@ public class EmployeeRepository {
 		employee.setHireDate(rs.getDate("hire_date"));
 		employee.setMailAddress(rs.getString("mail_address"));
 		employee.setZipCode(rs.getString("zip_code"));
-		employee.setAddress(rs.getString("address "));
+		employee.setAddress(rs.getString("address"));
 		employee.setTelephone(rs.getString("telephone"));
 		employee.setSalary(rs.getInt("salary"));
 		employee.setCharacteristics(rs.getString("characteristics"));
@@ -45,12 +47,12 @@ public class EmployeeRepository {
 	 */
 	
 	public List<Employee> findAll(){
-		String sql = "SELECT id,name,image,gender,hire_date,mail_address,mail_address,"
+		String sql = "SELECT id,name,image,gender,hire_date,mail_address,"
 				+ "zip_code,address,telephone,salary,characteristics,dependents_count"
 				+ " FROM employees ORDER BY hire_date DESC";
 		
 		try {
-		List<Employee> employeeList = template.query(sql, Employee_ROW_MAPPER);
+		List<Employee> employeeList = template.query(sql, EMPLOYEE_ROW_MAPPER);
 		return employeeList;
 		//一件も検索されなかった場合は0件のリストを返す。
 		}catch(Exception e) {
@@ -71,7 +73,7 @@ public class EmployeeRepository {
 		
 		SqlParameterSource param = new MapSqlParameterSource().addValue("id",id);
 		
-		Employee employee = template.queryForObject(sql, param, Employee_ROW_MAPPER);
+		Employee employee = template.queryForObject(sql, param, EMPLOYEE_ROW_MAPPER);
 		
 		return employee;
 	}

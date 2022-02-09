@@ -18,6 +18,7 @@ import jp.co.sample.repository.AdministratorRepository;
 @Transactional
 public class AdministratorService {
 	
+	/** administratorRepository */
 	@Autowired
 	private AdministratorRepository administratorRepository;
 	

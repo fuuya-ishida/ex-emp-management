@@ -5,6 +5,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -53,7 +55,10 @@ public class AdministratorController {
 	}
 	
 	@RequestMapping("insert")
-	public String insert(InsertAdministratorForm form ) {
+	public String insert(@Validated InsertAdministratorForm form,BindingResult result,Model model) {
+		if(result.hasErrors()) {
+			return "/administrator/insert";
+		}
 		Administrator administrator = new Administrator();
 		
 		administrator.setName(form.getName());
@@ -92,6 +97,13 @@ public class AdministratorController {
 	@Autowired
 	private HttpSession session;
 	
+	
+	/**
+	 * ログイン処理
+	 * 
+	 * 
+	 *
+	 */
 	@RequestMapping("/login")
 	public String login(LoginForm form,Model model) {
 		Administrator administrator = administratorService.login(form.getMailAddress(), form.getPassword());
@@ -106,7 +118,23 @@ public class AdministratorController {
 			
 		return "forward:/employee/showList";
 		}
-		}
+	}
+	
+	/**
+	 * ログアウト処理
+	 * 
+	 * 
+	 *
+	 */
+	@RequestMapping("/logout")
+	public String logout() {
+		session.invalidate();
+		
+		return "redirect:/";
+	}
+	
+	
+	
 	
 	
 }

@@ -33,7 +33,7 @@
  th:action="@{/login}" th:object="${loginForm}">
 						<fieldset>
 							<legend>ログイン</legend>
-							<div class="form-group" th:if="${param != null}">
+							<div th:if="${param != null}" class="form-group" >
 								<div class="alert alert-danger">
 			                       <p th:text="${message}"></p>
 			                    </div>

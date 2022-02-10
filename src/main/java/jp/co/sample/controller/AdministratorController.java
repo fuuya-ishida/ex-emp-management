@@ -92,6 +92,13 @@ public class AdministratorController {
 	@Autowired
 	private HttpSession session;
 	
+	
+	/**
+	 * ログイン処理
+	 * 
+	 * 
+	 *
+	 */
 	@RequestMapping("/login")
 	public String login(LoginForm form,Model model) {
 		Administrator administrator = administratorService.login(form.getMailAddress(), form.getPassword());
@@ -106,7 +113,23 @@ public class AdministratorController {
 			
 		return "forward:/employee/showList";
 		}
-		}
+	}
+	
+	/**
+	 * ログアウト処理
+	 * 
+	 * 
+	 *
+	 */
+	@RequestMapping("/logout")
+	public String logout() {
+		session.invalidate();
+		
+		return "redirect:/";
+	}
+	
+	
+	
 	
 	
 }

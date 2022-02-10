@@ -2,9 +2,13 @@ package jp.co.sample.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -55,23 +59,43 @@ public class EmployeeController {
 		return new UpdateEmployeeForm();
 	}
 	
+	/**
+	 * 従業員情報を検索
+	 * 
+	 * 
+	 *employee/detail.htmlへフォワード
+	 */
 	@RequestMapping("/showDetail")
-	public String showDetail(String id,Model model) {
+	public String showDetail(String id) {
 		int intid = Integer.parseInt(id);
 	
-		model.addAttribute("employee",employeeService.showDetail(intid));
+		session.setAttribute("employee",employeeService.showDetail(intid));
 		
 		return "employee/detail";
 	}
+	
+	@Autowired
+	private HttpSession session;
+	
+	/**
+	 * 扶養人数を更新する処理
+	 * 
+	 * 
+	 * employee/showListへフォワード
+	 */
 	@RequestMapping("/update")
-	public String update(UpdateEmployeeForm form) {
-		
+	public String update(@Validated UpdateEmployeeForm form,BindingResult result) {
+		if(result.hasErrors()) {
+			return "/employee/detail";
+		}
 		int intid = Integer.parseInt(form.getId());
 		Employee employee = employeeService.showDetail(intid);
 		
 		int intdependentCount = Integer.parseInt(form.getDependentsCount());
 		employee.setDependentsCount(intdependentCount);
 		employeeService.upDate(employee);
+		session.setAttribute("employee",employee);
+		
 		return "redirect:/employee/showList";
 	}
 	

@@ -75,7 +75,7 @@
 							      従業員名
 							    </th>
 							    <td>
-							     <span th:text="${employee.name}">山田花子</span>
+							     <span th:text="${session.employee.name}" >山田花子</span>
 							    </td>
 							  </tr>
 							  <tr>
@@ -83,7 +83,7 @@
 							      写真
 							    </th>
 							    <td>
-							      <img th:src="@{/img/{image}(image=${employee.image})}">
+							      <img th:src="@{/img/{image}(image=${session.employee.image})}">
 							    </td>
 							  </tr>
 							  <tr>
@@ -91,7 +91,7 @@
 							      性別
 							    </th>
 							    <td>
-							      <span th:text="${employee.gender}">女性</span>
+							      <span th:text="${session.employee.gender}">女性</span>
 							    </td>
 							  </tr>
 							  <tr>
@@ -99,7 +99,7 @@
 							      入社日
 							    </th>
 							    <td>
-							      <span th:text="${employee.hireDate}">2012/11/29</span>
+							      <span th:text="${session.employee.hireDate}">2012/11/29</span>
 							    </td>
 							  </tr>
 							  <tr>
@@ -107,7 +107,7 @@
 							      メールアドレス
 							    </th>
 							    <td>
-							      <span  th:text="${employee.mailAddress}">yamada@sample.com</span>
+							      <span  th:text="${session.employee.mailAddress}">yamada@sample.com</span>
 							    </td>
 							  </tr>
 							  <tr>
@@ -115,7 +115,7 @@
 							      郵便番号
 							    </th>
 							    <td>
-							      <span  th:text="${employee.zipCode}">111-1111</span>
+							      <span  th:text="${session.employee.zipCode}">111-1111</span>
 							    </td>
 							  </tr>
 							  <tr>
@@ -123,7 +123,7 @@
 							      住所
 							    </th>
 							    <td>
-							      <span th:text="${employee.address}">東京都新宿区1-1-1</span>
+							      <span th:text="${session.employee.address}">東京都新宿区1-1-1</span>
 							    </td>
 							  </tr>
 							  <tr>
@@ -131,7 +131,7 @@
 							      電話番号
 							    </th>
 							    <td>
-							      <span th:text="${employee.telephone}">090-0000-0000</span>
+							      <span th:text="${session.employee.telephone}">090-0000-0000</span>
 							    </td>
 							  </tr>
 							  <tr>
@@ -139,7 +139,7 @@
 							      給料
 							    </th>
 							    <td>
-							      <span th:text="${employee.salary}">400000円</span>
+							      <span th:text="${session.employee.salary}">400000円</span>
 							    </td>
 							  </tr>
 							  <tr>
@@ -147,7 +147,7 @@
 							      特性
 							    </th>
 							    <td>
-							      <span th:text="${employee.characteristics}">明るく素直な性格です。リーダーシップを発揮します。新卒社員研修の時はグループ開発の時にリーダーを買ってでました。積極性も人間性も抜群です。周りに対する不満も聞いたことがありません。</span>
+							      <span th:text="${session.employee.characteristics}">明るく素直な性格です。リーダーシップを発揮します。新卒社員研修の時はグループ開発の時にリーダーを買ってでました。積極性も人間性も抜群です。周りに対する不満も聞いたことがありません。</span>
 							    </td>
 							  </tr>
 							  <tr>
@@ -156,11 +156,11 @@
 							    </th>
 							    <td>
 							    	<label class="error-messages">
-											扶養人数を入力してください
+											<span  th:errors="*{dependentsCount}" style="color: red;">dummy</span>
 									</label>
 									<label class="control-label" style="color: red" for="dependentsCount"></label>
-									<input type="hidden" name="id" th:value="${employee.id}">
-									<input type="text" name="dependentsCount" id="dependentsCount" class="form-control" th:value="${employee.dependentsCount}">
+									<input type="hidden" name="id" th:value="${session.employee.id}">
+									<input type="text" name="dependentsCount" id="dependentsCount" class="form-control" th:value="${session.employee.dependentsCount}">
 							    </td>
 							  </tr>
 							</table>
